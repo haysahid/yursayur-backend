@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->string('unit');
             $table->bigInteger('store_id')->unsigned();
+            $table->timestamp('disabled_at')->nullable();
 
             $table->foreign('store_id')->references('id')->on('stores')->onUpdate('cascade')->onDelete('no action');
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('logo')->nullable();
             $table->string('banner')->nullable();
+            $table->timestamp('disabled_at')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('no action');
 
