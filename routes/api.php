@@ -21,3 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('auth/register', [UserController::class, 'register']);
 Route::post('auth/login', [UserController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile', [UserController::class, 'fetch']);
+    Route::post('/profile', [UserController::class, 'updateProfile']);
+    Route::post('/auth/logout', [UserController::class, 'logout']);
+
+    Route::apiResource('store', 'StoreController');
+    Route::apiResource('product', 'ProductController');
+});
