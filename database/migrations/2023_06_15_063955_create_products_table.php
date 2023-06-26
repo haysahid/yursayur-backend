@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('selling_price');
             $table->integer('stock');
             $table->string('unit');
+            $table->enum('category', ['Sayur', 'Buah']);
             $table->bigInteger('store_id')->unsigned();
             $table->timestamp('disabled_at')->nullable();
 
