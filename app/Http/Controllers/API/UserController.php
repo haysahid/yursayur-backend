@@ -85,7 +85,7 @@ class UserController extends Controller
 
         return ResponseFormatter::success([
             'user' => $user,
-        ], 'Data pengguna ditemukan', 200);
+        ], 'Data pengguna ditemukan.', 200);
     }
 
     public function updateProfile(Request $request)
@@ -133,7 +133,7 @@ class UserController extends Controller
 
             return ResponseFormatter::success([
                 'user' => $user,
-            ], 'Data pengguna berhasil diubah', 200);
+            ], 'Data pengguna berhasil diubah.', 200);
         } catch (Exception $error) {
             return ResponseFormatter::error('Ada yang salah. Autentikasi gagal.', 500);
         }
@@ -145,6 +145,6 @@ class UserController extends Controller
 
         return ResponseFormatter::success([
             'token' => $token,
-        ], 'Berhasil keluar', 200);
+        ], 'Berhasil keluar.', 200);
     }
 }
