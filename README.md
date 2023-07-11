@@ -7,60 +7,84 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Tentang YurSayur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online yang menghubungkan konsumen dengan pedagang sayur terdekat di daerahnya. Aplikasi YurSayur yang merupakan inovasi bisnis baru berbasis aplikasi android hadir untuk memudahkan masyarakat dalam melakukan pemesanan sayur.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Cara Deploy API Backend
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Instal Package
+   `composer install`
+2. Atur environment
 
-## Learning Laravel
+    ```jsx
+    APP_TIMEZONE='Asia/Jakarta'
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=nama_databasenya
+    DB_USERNAME=user_databasenya
+    DB_PASSWORD=password_databasenya
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    FILESYSTEM_DISK=public
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    ```
 
-## Laravel Sponsors
+3. Buat symbolic link public storage
+   `php artisan storage:link`
+4. Atur hak akses
+   `chown -R www-data.www-data /var/www/yursayur.projects.my.id/storage`
+   `chown -R www-data.www-data /var/www/yursayur.projects.my.id/bootstrap/cache`
+5. Jalankan migrasi database
+   `php artisan migrate`
+6. Jalankan Seeder
+   `php artisan db:seed`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## API Endpoints
 
-### Premium Partners
+-   **User** ✅
+    | Method | Endpoint | Expectation | Code | Response Body | Result |
+    | ------ | -------------- | ------------------------------------- | ---- | ------------------------------- | ------ |
+    | POST | /auth/register | Bisa menambahkan data User | 201 | Access Token dan Satu data User | ✅ |
+    | POST | /auth/login | Bisa log In dengan Email dan Password | 200 | Access Token dan Satu data User | ✅ |
+    | GET | /user | Bisa mengambil data User | 200 | Satu data User | ✅ |
+    | POST | /user | Bisa mengubah data User | 200 | Satu data User | ✅ |
+    | POST | /auth/logout | Bisa Log Out dan revoke Access Token | 200 | Token revoke status | ✅ |
+-   **Store** ✅
+    | Method | Endpoint | Expectation | Code | Response Body | Result |
+    | ------ | ----------- | ------------------------------------------------------------------------ | ---- | ---------------- | ------ |
+    | POST | /store | Bisa menambahkan Store | 201 | Satu data Store | ✅ |
+    | GET | /store | Bisa mengambil daftar data Store (Query: search, page, limit) | 200 | Array data Store | ✅ |
+    | GET | /store/{id} | Bisa mengambil salah satu data Store | 200 | Satu data Store | ✅ |
+    | POST | /store/{id} | Bisa mengubah salah satu data Store (Form data tambahan: \_method=’PUT’) | 200 | Satu data Store | ✅ |
+    | DELETE | /store/{id} | Bisa menghapus data salah satu Store | 200 | ID Store | ✅ |
+-   **Product** ✅
+    | Method | Endpoint | Expectation | Code | Response Body | Result |
+    | ------ | ------------- | ----------------------------------------------------------------------------------- | ---- | ------------------ | ------ |
+    | POST | /product | Bisa menambahkan Product | 201 | Satu data Product | ✅ |
+    | GET | /product | Bisa mengambil daftar data Product (Query: store_id, category, search, page, limit) | 200 | Array data Product | ✅ |
+    | GET | /product/{id} | Bisa mengambil salah satu data Product | 200 | Satu data Product | ✅ |
+    | POST | /product/{id} | Bisa mengubah salah satu data Product (Form data tambahan: \_method=’PUT’) | 200 | Satu data Product | ✅ |
+    | DELETE | /product/{id} | Bisa menghapus data salah satu Product | 200 | ID Product | ✅ |
+-   **Cart Item** ✅
+    | Method | Endpoint | Expectation | Code | Response Body | Result |
+    | ------ | ---------- | ---------------------------------------- | ---- | -------------------- | ------ |
+    | POST | /cart | Bisa menambahkan Cart Item | 201 | Satu data Cart Item | ✅ |
+    | GET | /cart | Bisa mengambil daftar data Cart Item | 200 | Array data Cart Item | ✅ |
+    | PUT | /cart/{id} | Bisa mengubah salah satu data Cart Item | 200 | Satu data Cart Item | ✅ |
+    | DELETE | /cart/{id} | Bisa menghapus data salah satu Cart Item | 200 | ID Cart Item | ✅ |
+-   **Order** ✅
+    | Method | Endpoint | Expectation | Code | Response Body | Result |
+    | ------ | ----------- | --------------------------------------------------------------------- | ---- | ---------------- | ------ |
+    | POST | /order | Bisa menambahkan Order | 201 | Satu data Order | ✅ |
+    | GET | /order | Bisa mengambil daftar data Order (Query: payment_status, page, limit) | 200 | Array data Order | ✅ |
+    | GET | /order/{id} | Bisa mengambil salah satu data Order | 200 | Satu data Order | ✅ |
+    | PUT | /order/{id} | Bisa mengubah salah satu data Order | 200 | Satu data Order | ✅ |
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Kontributor
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. [Sahid Anwar](https://github.com/haysahid)
+2. [Mico Yumna Ardhana](https://github.com/micoardhana090701)
+3. Suha Jihan Majida
+4. Ahmad Hermawan Bakhtiar Ikhsani
