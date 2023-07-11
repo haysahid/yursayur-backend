@@ -30,4 +30,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('store', 'StoreController');
     Route::apiResource('product', 'ProductController');
     Route::apiResource('cart', 'CartItemController');
+    Route::apiResource('order', 'OrderController');
 });
