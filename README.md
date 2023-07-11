@@ -43,7 +43,7 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
 
 ## API Endpoints
 
--   **User** ✅
+-   **User** 
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | -------------- | ------------------------------------- | ---- | ------------------------------- | ------ |
     | POST | /auth/register | Bisa menambahkan data User | 201 | Access Token dan Satu data User | ✅ |
@@ -51,7 +51,8 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
     | GET | /user | Bisa mengambil data User | 200 | Satu data User | ✅ |
     | POST | /user | Bisa mengubah data User | 200 | Satu data User | ✅ |
     | POST | /auth/logout | Bisa Log Out dan revoke Access Token | 200 | Token revoke status | ✅ |
--   **Store** ✅
+
+-   **Store** 
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | ----------- | ------------------------------------------------------------------------ | ---- | ---------------- | ------ |
     | POST | /store | Bisa menambahkan Store | 201 | Satu data Store | ✅ |
@@ -59,7 +60,8 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
     | GET | /store/{id} | Bisa mengambil salah satu data Store | 200 | Satu data Store | ✅ |
     | POST | /store/{id} | Bisa mengubah salah satu data Store (Form data tambahan: \_method=’PUT’) | 200 | Satu data Store | ✅ |
     | DELETE | /store/{id} | Bisa menghapus data salah satu Store | 200 | ID Store | ✅ |
--   **Product** ✅
+
+-   **Product** 
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | ------------- | ----------------------------------------------------------------------------------- | ---- | ------------------ | ------ |
     | POST | /product | Bisa menambahkan Product | 201 | Satu data Product | ✅ |
@@ -67,14 +69,16 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
     | GET | /product/{id} | Bisa mengambil salah satu data Product | 200 | Satu data Product | ✅ |
     | POST | /product/{id} | Bisa mengubah salah satu data Product (Form data tambahan: \_method=’PUT’) | 200 | Satu data Product | ✅ |
     | DELETE | /product/{id} | Bisa menghapus data salah satu Product | 200 | ID Product | ✅ |
--   **Cart Item** ✅
+
+-   **Cart Item** 
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | ---------- | ---------------------------------------- | ---- | -------------------- | ------ |
     | POST | /cart | Bisa menambahkan Cart Item | 201 | Satu data Cart Item | ✅ |
     | GET | /cart | Bisa mengambil daftar data Cart Item | 200 | Array data Cart Item | ✅ |
     | PUT | /cart/{id} | Bisa mengubah salah satu data Cart Item | 200 | Satu data Cart Item | ✅ |
     | DELETE | /cart/{id} | Bisa menghapus data salah satu Cart Item | 200 | ID Cart Item | ✅ |
--   **Order** ✅
+    
+-   **Order** 
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | ----------- | --------------------------------------------------------------------- | ---- | ---------------- | ------ |
     | POST | /order | Bisa menambahkan Order | 201 | Satu data Order | ✅ |
