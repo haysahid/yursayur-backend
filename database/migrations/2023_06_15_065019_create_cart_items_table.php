@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
             $table->integer('quantity');
+            $table->boolean('is_selected');
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('no action');
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('no action');
