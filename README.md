@@ -14,7 +14,9 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
 ## Cara Deploy API Backend
 
 1. Instal Package
-   `composer install`
+
+    `composer install`
+
 2. Atur environment
 
     ```jsx
@@ -32,18 +34,25 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
     ```
 
 3. Buat symbolic link public storage
-   `php artisan storage:link`
+
+    `php artisan storage:link`
+
 4. Atur hak akses
-   `chown -R www-data.www-data /var/www/yursayur.projects.my.id/storage`
-   `chown -R www-data.www-data /var/www/yursayur.projects.my.id/bootstrap/cache`
+
+    `chown -R www-data.www-data /var/www/yursayur.projects.my.id/storage`
+    `chown -R www-data.www-data /var/www/yursayur.projects.my.id/bootstrap/cache`
+
 5. Jalankan migrasi database
-   `php artisan migrate`
+
+    `php artisan migrate`
+
 6. Jalankan Seeder
-   `php artisan db:seed`
+
+    `php artisan db:seed`
 
 ## API Endpoints
 
--   **User** 
+-   **User**
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | -------------- | ------------------------------------- | ---- | ------------------------------- | ------ |
     | POST | /auth/register | Bisa menambahkan data User | 201 | Access Token dan Satu data User | ✅ |
@@ -52,7 +61,7 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
     | POST | /user | Bisa mengubah data User | 200 | Satu data User | ✅ |
     | POST | /auth/logout | Bisa Log Out dan revoke Access Token | 200 | Token revoke status | ✅ |
 
--   **Store** 
+-   **Store**
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | ----------- | ------------------------------------------------------------------------ | ---- | ---------------- | ------ |
     | POST | /store | Bisa menambahkan Store | 201 | Satu data Store | ✅ |
@@ -61,7 +70,7 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
     | POST | /store/{id} | Bisa mengubah salah satu data Store (Form data tambahan: \_method=’PUT’) | 200 | Satu data Store | ✅ |
     | DELETE | /store/{id} | Bisa menghapus data salah satu Store | 200 | ID Store | ✅ |
 
--   **Product** 
+-   **Product**
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | ------------- | ----------------------------------------------------------------------------------- | ---- | ------------------ | ------ |
     | POST | /product | Bisa menambahkan Product | 201 | Satu data Product | ✅ |
@@ -70,15 +79,14 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
     | POST | /product/{id} | Bisa mengubah salah satu data Product (Form data tambahan: \_method=’PUT’) | 200 | Satu data Product | ✅ |
     | DELETE | /product/{id} | Bisa menghapus data salah satu Product | 200 | ID Product | ✅ |
 
--   **Cart Item** 
+-   **Cart Item**
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | ---------- | ---------------------------------------- | ---- | -------------------- | ------ |
     | POST | /cart | Bisa menambahkan Cart Item | 201 | Satu data Cart Item | ✅ |
     | GET | /cart | Bisa mengambil daftar data Cart Item | 200 | Array data Cart Item | ✅ |
     | PUT | /cart/{id} | Bisa mengubah salah satu data Cart Item | 200 | Satu data Cart Item | ✅ |
     | DELETE | /cart/{id} | Bisa menghapus data salah satu Cart Item | 200 | ID Cart Item | ✅ |
-    
--   **Order** 
+-   **Order**
     | Method | Endpoint | Expectation | Code | Response Body | Result |
     | ------ | ----------- | --------------------------------------------------------------------- | ---- | ---------------- | ------ |
     | POST | /order | Bisa menambahkan Order | 201 | Satu data Order | ✅ |
