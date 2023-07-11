@@ -22,11 +22,16 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->input('search');
+        $store_id = $request->input('store_id');
         $category = $request->input('category');
+        $search = $request->input('search');
         $limit = $request->input('limit', 10);
 
         $products = Product::query();
+
+        if ($store_id) {
+            $products->where('products.store_id', $store_id);
+        }
 
         if ($category) {
             $products->where('products.category', $category);
