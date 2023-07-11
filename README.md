@@ -37,17 +37,11 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
 
     `php artisan storage:link`
 
-4. Atur hak akses
-
-    `chown -R www-data.www-data /var/www/yursayur.projects.my.id/storage`
-
-    `chown -R www-data.www-data /var/www/yursayur.projects.my.id/bootstrap/cache`
-
-5. Jalankan migrasi database
+4. Jalankan migrasi database
 
     `php artisan migrate`
 
-6. Jalankan Seeder
+5. Jalankan Seeder
 
     `php artisan db:seed`
 
