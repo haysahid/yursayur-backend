@@ -70,7 +70,7 @@ class CartItemController extends Controller
 
             return ResponseFormatter::success([
                 'cart_item' => $cart_item,
-            ], 'Produk berhasil ditambahkan ke keranjang.', 200);
+            ], 'Produk berhasil ditambahkan ke keranjang.', 201);
         } catch (Exception $error) {
             return ResponseFormatter::error('Terjadi kesalahan. Produk gagal ditambahkan ke keranjang.' . $error, 500);
         }

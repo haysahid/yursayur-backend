@@ -135,7 +135,7 @@ class ProductController extends Controller
 
             return ResponseFormatter::success([
                 'product' => $product,
-            ], 'Produk berhasil ditambahkan.', 200);
+            ], 'Produk berhasil ditambahkan.', 201);
         } catch (Exception $error) {
             return ResponseFormatter::error('Terjadi kesalahan. Produk gagal ditambahkan.' . $error, 500);
         }

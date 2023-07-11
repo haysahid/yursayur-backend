@@ -84,7 +84,7 @@ class StoreController extends Controller
 
             return ResponseFormatter::success([
                 'store' => $store,
-            ], 'Toko berhasil ditambahkan.', 200);
+            ], 'Toko berhasil ditambahkan.', 201);
         } catch (Exception $error) {
             return ResponseFormatter::error('Terjadi kesalahan. Toko gagal ditambahkan.', 500);
         }
