@@ -40,6 +40,7 @@ Aplikasi YurSayur adalah sebuah aplikasi platform jual beli sayur secara online 
 4. Atur hak akses
 
     `chown -R www-data.www-data /var/www/yursayur.projects.my.id/storage`
+
     `chown -R www-data.www-data /var/www/yursayur.projects.my.id/bootstrap/cache`
 
 5. Jalankan migrasi database
