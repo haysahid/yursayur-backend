@@ -57,7 +57,7 @@ class UserController extends Controller
                 return ResponseFormatter::error('Email atau password salah. Autentikasi gagal.', 401);
             }
 
-            $user = User::where('email', $request->input('email'))->first();
+            $user = User::where('email', $request->input('email'))->with('store')->first();
 
             if (!Hash::check($request->input('password'), $user->password, [])) {
                 throw new Exception('Invalid credentials');
@@ -81,7 +81,7 @@ class UserController extends Controller
 
     public function fetch()
     {
-        $user = User::find(Auth::user()->id);
+        $user = User::with('store')->find(Auth::user()->id);
 
         return ResponseFormatter::success([
             'user' => $user,
@@ -130,6 +130,8 @@ class UserController extends Controller
                     'avatar' => $avatar_path,
                 ]);
             }
+
+            $user = User::with('store')->find($user->id);
 
             return ResponseFormatter::success([
                 'user' => $user,
