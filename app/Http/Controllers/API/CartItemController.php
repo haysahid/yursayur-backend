@@ -35,7 +35,7 @@ class CartItemController extends Controller
         //     ->orderBy('sub_total', 'desc')
         //     ->where('user_id', $user->id)->get();
 
-        $cart_items->where('user_id', $user->id)->latest();
+        $cart_items->where('user_id', $user->id)->with('product')->latest();
 
         return ResponseFormatter::success(
             [
