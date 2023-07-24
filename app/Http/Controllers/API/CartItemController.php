@@ -57,12 +57,31 @@ class CartItemController extends Controller
         ]);
 
         $user = Auth::user();
+        $product_id = $request->input('product_id');
+        $quantity = (int) $request->input('quantity');
 
         try {
+            // Update old cart item
+            $old_cart_item = CartItem::where('product_id', $product_id)->first();
+
+            if ($old_cart_item) {
+                $quantity = $old_cart_item->quantity + $quantity;
+                $old_cart_item->update([
+                    'quantity' => $quantity,
+                ]);
+
+                $old_cart_item = CartItem::with('product')->find($old_cart_item->id);
+
+                return ResponseFormatter::success([
+                    'cart_item' => $old_cart_item,
+                ], 'Item keranjang berhasil diubah.', 200);
+            }
+            
+            // Create new cart item
             $cart_item = CartItem::create([
                 'user_id' => $user->id,
-                'product_id' => $request->input('product_id'),
-                'quantity' => $request->input('quantity'),
+                'product_id' => $product_id,
+                'quantity' => $quantity,
                 'is_selected' => 1,
             ]);
 
