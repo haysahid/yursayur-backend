@@ -62,11 +62,15 @@ class CartItemController extends Controller
 
         try {
             // Update old cart item
-            $old_cart_item = CartItem::where('product_id', $product_id)->first();
+            $old_cart_item = CartItem::where([
+                ['user_id', '=', $user->id],
+                ['product_id', '=', $product_id],
+            ])->first();
 
             if ($old_cart_item) {
-                $quantity = $old_cart_item->quantity + $quantity;
-                $old_cart_item->update([
+                $quantity = (int) $old_cart_item->quantity + $quantity;
+
+                CartItem::find($old_cart_item->id)->update([
                     'quantity' => $quantity,
                 ]);
 
