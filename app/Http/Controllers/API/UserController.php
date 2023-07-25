@@ -102,17 +102,12 @@ class UserController extends Controller
 
         if ($user->email != $request->input('email')) {
             $request->validate([
-                'email' => 'required|string|email|max:255|unique:users',
+                'email' => 'nullable|string|email|max:255|unique:users',
             ]);
         }
 
         try {
-            $user->update([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'address' => $request->input('address'),
-                'phone' => $request->input('phone'),
-            ]);
+            $user->update($request->all());
 
             if ($request->hasFile('avatar')) {
                 $avatar_path = '';
