@@ -55,7 +55,7 @@ class OrderController extends Controller
         try {
             // Create order
             $address = $request->input('address');
-            $shipping_costs = 0;
+            $shipping_costs = 10000;
             $notes = $request->input('notes');
             $payment_status = 'Pending';
 
@@ -93,7 +93,7 @@ class OrderController extends Controller
 
             return ResponseFormatter::success([
                 'order' => $order,
-                'sub_total' => (int) $count_sub_total->sub_total,
+                'sub_total' => (int) $count_sub_total->sub_total + $order->shipping_costs,
             ], 'Pesanan berhasil ditambahkan.', 201);
         } catch (Exception $error) {
             return ResponseFormatter::error('Terjadi kesalahan. Pesanan gagal ditambahkan.' . $error, 500);
