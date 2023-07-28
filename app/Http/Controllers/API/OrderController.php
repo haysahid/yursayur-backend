@@ -82,7 +82,10 @@ class OrderController extends Controller
             }
 
             // Delete cart item
-            $cart_items->delete();
+            CartItem::where([
+                ['user_id', '=', $user->id],
+                ['is_selected', '=', 1],
+            ])->delete();
 
             // Count sub total
             $count_sub_total = CartItem::join('products', 'cart_items.product_id', '=', 'products.id')
