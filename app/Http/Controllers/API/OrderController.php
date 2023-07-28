@@ -81,6 +81,9 @@ class OrderController extends Controller
                 ]);
             }
 
+            // Delete cart item
+            $cart_item->delete();
+
             // Count sub total
             $count_sub_total = CartItem::join('products', 'cart_items.product_id', '=', 'products.id')
                 ->select(DB::raw('sum(cart_items.quantity * products.selling_price) as sub_total'))
