@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,6 +45,7 @@ class ReviewController extends Controller
     public function store(String $product_id, Request $request)
     {
         $request->validate([
+            'order_item_id' => 'required',
             'description' => 'nullable|string|max:255',
             'rating' => ['required', 'integer', Rule::in([1, 2, 3, 4, 5])],
         ]);
@@ -56,12 +58,19 @@ class ReviewController extends Controller
 
         $user = Auth::user();
 
+        $order_item_id = $request->input('order_item_id');
+
         try {
             $review = Review::create([
                 'product_id' => $product_id,
                 'user_id' => $user->id,
                 'description' => $request->input('description'),
                 'rating' => $request->input('rating'),
+            ]);
+
+            // Update order item
+            OrderItem::find($order_item_id)->update([
+                'is_reviewed' => 1,
             ]);
 
             $review = Review::with('user')->find($review->id);
