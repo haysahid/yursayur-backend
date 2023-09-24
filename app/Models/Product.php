@@ -53,4 +53,14 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function count_ratings()
+    {
+        return $this->join('reviews', 'products.id', '=', 'reviews.product_id')->avg('reviews.rating');
+    }
 }

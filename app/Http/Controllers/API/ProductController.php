@@ -5,15 +5,17 @@ namespace App\Http\Controllers\API;
 use Exception;
 use App\Models\Tag;
 use App\Models\Store;
+use App\Models\Review;
 use App\Models\Product;
+use App\Models\ProductTag;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\ProductTag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -42,7 +44,7 @@ class ProductController extends Controller
                 ->where('products.name', 'like', '%' . $search . '%')
                 ->orWhere('products.description', 'like', '%' . $search . '%');
         }
-
+        // TODO: Count ratings
         $products->with(['store', 'product_images', 'tags'])->select('products.*')->latest();
 
         return ResponseFormatter::success(
@@ -98,14 +100,7 @@ class ProductController extends Controller
             if ($request->hasFile('product_images')) {
                 $files = $request->file('product_images');
 
-                foreach ($files as $file) {
-                    $image_path = $file->store('store/' . $store->id . '/product');
-
-                    ProductImage::create([
-                        'image' => $image_path,
-                        'product_id' => $product->id,
-                    ]);
-                }
+                ProductImageController::addProductImages($product->id, $files);
             }
 
             // Tags
@@ -188,8 +183,9 @@ class ProductController extends Controller
             $product->update($request->all());
 
             // Update tags
-            $previousTags = ProductTag::where('product_tags.product_id', $product->id);
-            $previousTags->delete();
+            $prevTags = ProductTag::where('product_tags.product_id', $product->id);
+
+            $prevTags->delete();
 
             $tags = explode(',', strtolower($request->input('tags')));
 
